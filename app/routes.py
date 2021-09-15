@@ -454,6 +454,7 @@ def parsons_frames():
   params = params.split('&')
   rows = []
   labels = []
+  problem_name = "test_problem"
   for param in params:
     if param:
       key, val = param.split('=')
@@ -462,6 +463,8 @@ def parsons_frames():
         rows.append({'left': left, 'right': right})
       elif key == 'label':
         labels.append(val)
+      elif key == 'problemname':
+        problem_name = val
 
   if not rows:
     rows = [{'left': 'x', 'right': 'blank'}, {'left': 'y', 'right': 'blank'}]
@@ -474,7 +477,7 @@ def parsons_frames():
     code_lines += json.dumps({'label': label, 'vars': rows}) + '\n'
 
   return render_template("parsons_frames.html",
-                         problem_name="test_problem",
+                         problem_name=problem_name,
                          hide_timer=True,
                          code_lines=code_lines,
                          disable_problem_statement=True,
