@@ -170,7 +170,8 @@
             console.log(student_solution)
             var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(student_solution));
             $('#save').attr("href", "data:"+data);
-            $('#save').attr("download", "data.json");
+            var filename = '{{ problem_name | safe }}' + ".json";
+            $('#save').attr("download", filename);
         }
 
         $("#submit").click(_.throttle(submitParsons, 500));

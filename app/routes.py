@@ -445,6 +445,7 @@ def parsons(problem_name, code_skeleton=False):
                          )
 
 
+
 @app.route('/parsons_frames/')
 def parsons_frames():
   # print(request.url)
@@ -468,6 +469,8 @@ def parsons_frames():
     labels = ['box'+str(i) for i in range(3)]
   code_lines = ''
   for label in labels:
+    # the use of \n to separate lines here is kind of a hack. makes sense
+    # if you're using this on a block of code, I suppose.
     code_lines += json.dumps({'label': label, 'vars': rows}) + '\n'
 
   return render_template("parsons_frames.html",
