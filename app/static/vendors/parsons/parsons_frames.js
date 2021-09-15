@@ -761,37 +761,20 @@
       }
 
 
-      // while (codeline.code.search(/!BLANK/) >= 0) {
-      //   var replaceText = "";
-      //   console.log(codeline.code)
-      //   if (codeline.code.search(blankRegexp) >= 0) {
-      //     replaceText = codeline.code.match(blankRegexp)[1].trim()
-      //     codeline.code = codeline.code.replace(blankRegexp, "");
-      //   }
-      //   codeline.code = codeline.code.replace(/!BLANK/, function() {
-      //     return "<input type='text' class='text-box' value=\"" + replaceText + "\" " +
-      //         "style = 'width: " + ((replaceText.length + 3) * 8) + 'px\'' +
-      //         "onkeypress=\"this.style.width = ((this.value.length + 3) * 8) + 'px';\"'/>"
-      //   });
-      // }
       data = JSON.parse(codeline.code);
-      // table = '<li id="' + codeline.id + '" style="padding: 0px;">' +
-      //   '<table class="table table-bordered" style="margin-bottom: 0px;"><thead><tr>' +
-      //     '<th scope="col" colspan="2">Scope: '+blank()+'</th>'+//'<th scope="col">Bar</th>'+
-      //     '</tr></thead><tbody><tr><td class="prettyprint lang-py">x</td><td>'+blank()+'</td></tr>'+
-      //     '</tr></thead><tbody><tr><td class="prettyprint lang-py">y</td><td>'+blank()+'</td></tr>'+
-      //   // '</tr></thead><tbody><tr><td colspan="2">Continuation: '+blank()+'</td></tr>'+
-      //   '</tbody></table>'+
-      //   '<\/li>';
+      // JBC oog oog oog building html via string-append is just asking for
+      // terrible terrible things to happen, blecch! It will be a miracle
+      // if I can touch this without breaking it, and if it's not already
+      // broken. FIXME FIXME PLEASE
       table = '<li id="' + codeline.id + '" style="padding: 0px;">' +
-        '<table class="table table-bordered" style="margin-bottom: 0px;"><thead><tr>' +
-          '<th scope="col" colspan="2">'+parse_blank(data.label)+'</th>';
+        '<table class="table table-bordered" style="margin-bottom: 0px;">' +
+          '<thead><tr>' +
+          '<td scope="col" colspan="2">'+parse_blank(data.label)+'</td></tr></thead>' +
+          '<tbody>';
+      
       data.vars.forEach(element => {
-        table += '</tr></thead><tbody><tr><td class="prettyprint lang-py">'+parse_blank(element.left)+'</td><td>'+parse_blank(element.right)+'</td></tr>';
+        table += '<tr><td class="prettyprint lang-py">'+parse_blank(element.left)+'</td><td>'+parse_blank(element.right)+'</td></tr>';
       });
-          // '</tr></thead><tbody><tr><td class="prettyprint lang-py">x</td><td>'+blank()+'</td></tr>'+
-          // '</tr></thead><tbody><tr><td class="prettyprint lang-py">y</td><td>'+blank()+'</td></tr>'+
-        // '</tr></thead><tbody><tr><td colspan="2">Continuation: '+blank()+'</td></tr>'+
 
       table += '</tbody></table>'+
         '<\/li>';
