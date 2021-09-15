@@ -765,13 +765,14 @@
       // broken. FIXME FIXME PLEASE
       table = '<li id="' + codeline.id + '" style="padding: 0px;">' +
         '<table class="table table-bordered" style="margin-bottom: 0px;">' +
-          '<thead><tr>' +
-          '<td scope="col" colspan="2">'+parse_blank(data.label)+'</td></tr></thead>' +
           '<tbody>';
       
       data.vars.forEach(element => {
         table += '<tr><td class="prettyprint lang-py">'+parse_blank(element.left)+'</td><td>'+parse_blank(element.right)+'</td></tr>';
       });
+
+      table += '<tr>' +
+        '<td scope="col" colspan="2">'+parse_blank(data.label)+'</td></tr>';
 
       table += '</tbody></table>'+
         '<\/li>';
