@@ -394,17 +394,14 @@
        codeClone.find("input").each(function (_, inp) {
            inp.replaceWith(inp.value);
        });
-       var label = codeClone.find('thead th')[0].innerText.trimRight();
+       var label = 'bogus'; // codeClone.find('thead th')[0].innerText.trimRight();
        var data = [];
-       codeClone.find('tbody').each(function (_, row) {
-           values = $(row).find('td');
-           if (values.length === 2) {
-             datum = {}
-             datum[values[0].innerText.trimRight()] = values[1].innerText.trimRight();
-             data.push(datum);
-           } else {
-             console.log("Error: Expected 2 elements in each row after the 1st");
-           }
+       codeClone.find('tr').each(function (_, row) {
+         var datum = [];
+         $(row).find('td').each(function (dontcare,item) {
+           datum.push(item.innerText.trimRight())
+         })
+         data.push(datum);
        })
 
        frames.push({label: label, data: data})
