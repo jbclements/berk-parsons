@@ -771,9 +771,6 @@
         table += '<tr><td class="prettyprint lang-py">'+parse_blank(element.left)+'</td><td>'+parse_blank(element.right)+'</td></tr>';
       });
 
-      table += '<tr>' +
-        '<td scope="col" colspan="2">'+parse_blank(data.label)+'</td></tr>';
-
       table += '</tbody></table>'+
         '<\/li>';
 
